@@ -17,7 +17,7 @@ services:
       - baota_net
 
   server:
-    image: anchorlau/ce-server
+    image: anchorlau/house-panel 
     platform: "linux/x86_64"        # 如果是m芯片必须加这个
     privileged: true
     restart: always
