@@ -12,6 +12,7 @@ services:
     volumes:
       - /tmp:/tmp
       - ${APP_PATH}/upload:/app/filestore
+      - ${APP_PATH}/nginx:/etc/nginx/conf.d/
     networks:
       - baota_net
 
@@ -21,7 +22,7 @@ services:
     privileged: true
     restart: always
     expose:
-      - 8080
+      - 28080:8080
     environment:
       TZ: "Asia/Shanghai"
       LANG: "C.UTF-8"
