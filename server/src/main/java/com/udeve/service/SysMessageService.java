@@ -47,11 +47,14 @@ public class SysMessageService {
     @Autowired
     XcxUserRepository xcxUserRepository;
 
-    @Autowired
+@Autowired
     MyconfigService myconfigService;
 
     @Autowired
     WxMaService wxMaService;
+
+    @Autowired
+    SmsService smsService;
 
 
     /**
@@ -186,6 +189,38 @@ public class SysMessageService {
             sysMessageRepository.deleteById(sysMessage.getId());
         });
         return JsonResponse.ok();
+    }
+
+    /**
+     * 发送预约通知给渠道人员
+     * @param channelUserId 渠道人员ID
+     * @param clientName 客户姓名
+     * @param clientMobile 客户手机号
+     * @param postTitle 楼盘标题
+     */
+    public void sendBookingNotification(Integer channelUserId, String clientName, String clientMobile, String postTitle){
+        // 1. 发送小程序内系统消息
+        String title = "新预约提醒";
+        String content = String.format("客户%s(%s)预约了楼盘《%s》，请及时跟进", 
+                clientName, clientMobile, postTitle);
+        String url = "/pkgMyself/pages/booking/index";
+        
+        sendSysMessage("booking", title, content, channelUserId, url);
+        
+        // 2. 发送短信通知
+        // 获取渠道人员手机号
+        Optional<User> channelUserOpt = userRepository.findById(channelUserId);
+        if (channelUserOpt.isPresent()) {
+            User channelUser = channelUserOpt.get();
+            String mobile = channelUser.getMobile();
+            if (mobile != null && !mobile.isEmpty()) {
+                // 发送简洁短信：您有新的预约信息，请登录小程序查看详情
+                smsService.sendBookingNotification(mobile, clientName);
+                log.info("已发送预约短信通知给渠道人员：{}，手机号：{}", channelUserId, mobile);
+            } else {
+                log.warn("渠道人员{}没有手机号，无法发送短信通知", channelUserId);
+            }
+        }
     }
 
 }

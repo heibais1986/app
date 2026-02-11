@@ -181,6 +181,29 @@ public class BookingLogService {
         }
 
         bookingLogRepository.saveAndFlush(map);
+        
+        // 发送通知给渠道人员
+        if (bookingLogsRequest.getChannelUserId() != null) {
+            try {
+                String clientName = bookingLogsRequest.getName();
+                String clientMobile = bookingLogsRequest.getMobile();
+                String postTitle = postById.get().getTitle();
+                
+                // 发送小程序通知和短信通知
+                sysMessageService.sendBookingNotification(
+                        bookingLogsRequest.getChannelUserId(),
+                        clientName,
+                        clientMobile,
+                        postTitle
+                );
+                log.info("预约通知已发送给渠道人员：{}，客户：{}，楼盘：{}",
+                        bookingLogsRequest.getChannelUserId(), clientName, postTitle);
+            } catch (Exception e) {
+                log.error("发送预约通知失败：{}", e.getMessage(), e);
+                // 通知发送失败不影响预约成功
+            }
+        }
+        
         return JsonResponse.ok("预约成功");
     }
 

@@ -24,9 +24,11 @@ public class SysMessage {
 
     public static final String CAT_INTEGRAL_CHANGE="integral_change";
     public static final String CAT_LIKE="like";
+    public static final String CAT_BOOKING="booking";
 
     public static final String TITLE_LIKE="点赞";
     public static final String TITLE_INTEGRAL_CHANGE="积分变动";
+    public static final String TITLE_BOOKING="新预约提醒";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
