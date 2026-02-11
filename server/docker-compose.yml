@@ -17,12 +17,12 @@ services:
       - baota_net
 
   server:
-    image: anchorlau/house-panel 
+    image: anchorlau/ce-server
     platform: "linux/x86_64"        # 如果是m芯片必须加这个
     privileged: true
     restart: always
-    ports:
-      - 28080:8080
+    expose:
+      - 28080
     environment:
       TZ: "Asia/Shanghai"
       LANG: "C.UTF-8"
