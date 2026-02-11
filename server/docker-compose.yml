@@ -21,7 +21,7 @@ services:
     platform: "linux/x86_64"        # 如果是m芯片必须加这个
     privileged: true
     restart: always
-    expose:
+    ports:
       - 28080:8080
     environment:
       TZ: "Asia/Shanghai"
