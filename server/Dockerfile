@@ -33,4 +33,4 @@ COPY src/main/resources/application.properties application.properties
 EXPOSE 8080
 
 # Command to run the application. The database credentials will be passed as environment variables.
-ENTRYPOINT ["java", "-Xms512m -Xmx1024m -jar", "/app/server.jar -Dspring.config.additional-location=/app/application.properties"]
+ENTRYPOINT ["java", "-Xms512m", "-Xmx1024m", "-jar", "/app/server.jar", "-Dspring.config.additional-location=/app/application.properties"]
