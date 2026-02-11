@@ -1,6 +1,9 @@
 package com.udeve.controllers.admin;
 
-import com.udeve.BaseAdminController;
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
+import com.udeve.BaseApiController;
 import com.udeve.service.PostPdfService;
 import com.udeve.utils.JsonResponse;
 import io.swagger.annotations.Api;
@@ -9,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@SaCheckLogin
 @Api(tags = "楼盘PDF管理")
+@SaCheckRole(value = {"admin","demo"},mode = SaMode.OR)
 @RequestMapping("/admin6")
-public class AdminPostPdfController extends BaseAdminController {
+public class AdminPostPdfController extends BaseApiController {
 
     @Autowired
     private PostPdfService postPdfService;
