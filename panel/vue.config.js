@@ -33,7 +33,7 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '/api': {
-                target: 'https://hou.docman.edu.kg/',
+                target: 'http://127.0.0.1:8080/',
                 //target: 'http://demo2.youdeyunke.com/',
             }
         }
