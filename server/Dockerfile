@@ -1,7 +1,7 @@
 # --- Build Stage ---
 # Use an official Maven image to build the application.
 # This image includes a full JDK and Maven.
-FROM maven:3.8.5-openjdk-18 AS build
+FROM maven:3.8.5-openjdk-17 AS build
 
 # Set the working directory inside the container
 WORKDIR /workspace
@@ -20,7 +20,7 @@ RUN mvn clean package -DskipTests
 # --- Run Stage ---
 # Use a lightweight JRE image for the final application image.
 # This reduces the final image size significantly.
-FROM eclipse-temurin:18-jre-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 # Set the working directory
 WORKDIR /app
