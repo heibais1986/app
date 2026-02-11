@@ -1,0 +1,90 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 友得云客  - 开启房产营销新纪元
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2019~2023 优得（西安）信息科技有限公司版权所有
+ * +----------------------------------------------------------------------
+ * | Licensed 友得云客不是自由软件 未经允许不可移除相关版权
+ * +----------------------------------------------------------------------
+ * | Author: www.youdeyunke.com
+ * +----------------------------------------------------------------------
+ */
+/* components/post-pdf-list/post-pdf-list.wxss */
+
+.pdf-list {
+    background-color: #fff;
+    padding: 20rpx 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.pdf-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.pdf-header .title {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+}
+
+.pdf-header .count {
+    font-size: 26rpx;
+    color: #999;
+    margin-left: 10rpx;
+}
+
+.pdf-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-item {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.pdf-item:last-child {
+    border-bottom: none;
+}
+
+.pdf-icon {
+    width: 80rpx;
+    height: 80rpx;
+    background-color: #fff2f0;
+    border-radius: 12rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.pdf-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pdf-name {
+    font-size: 28rpx;
+    color: #333;
+    line-height: 1.4;
+    word-break: break-all;
+}
+
+.pdf-size {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 6rpx;
+}
+
+.pdf-action {
+    padding: 20rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

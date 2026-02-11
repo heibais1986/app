@@ -64,3 +64,22 @@
     width: 80rpx;
     height: 80rpx;
 }
+
+/* 下载按钮样式 */
+.download-btn {
+    position: absolute;
+    right: 10rpx;
+    bottom: 10rpx;
+    width: 48rpx;
+    height: 48rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.items .item {
+    position: relative;
+}

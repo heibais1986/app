@@ -44,4 +44,18 @@ public class BookingLogsListVo implements Serializable {
     public String name;
 
     public String mobile;
+
+    // 性别：0-保密，1-男，2-女
+    public Integer gender;
+
+    // 报备功能新增字段
+    public String brokerName;      // 带看经纪人姓名
+
+    public String brokerMobile;    // 带看经纪人电话
+
+    public AdminWeappUserListVo channelUser;  // 渠道人员
+
+    public String postIds;         // 意向楼盘ID列表
+
+    public String note;            // 备注
 }

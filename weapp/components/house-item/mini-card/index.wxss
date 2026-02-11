@@ -111,3 +111,16 @@
     float:right;
     color: #EF3C51;
 }
+
+.commission {
+    margin-top: 10rpx;
+    display: flex;
+    align-items: center;
+}
+
+.commission-text {
+    margin-left: 8rpx;
+    color: #ff6600;
+    font-size: 24rpx;
+    font-weight: bold;
+}

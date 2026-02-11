@@ -171,6 +171,10 @@ public class HouseService {
                 predicates.add(criteriaBuilder.equal(root.get("publishStatus"),queryDto.getPublishStatus()));
             }
 
+            // 房源类型筛选：0-普通，1-工抵房，2-代卖房
+            if(queryDto.getHouseType() != null){
+                predicates.add(criteriaBuilder.equal(root.get("houseType"), queryDto.getHouseType()));
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         };

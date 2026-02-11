@@ -13,8 +13,35 @@
     <van-panel title="状态：{{statusName[item.status]}}" status="{{ item.date  }} {{ item.time }}" use-footer-slot>
         <view style="height:30rpx;"></view>
         <post-item style="" post="{{item.post}}" border="{{false}}" shadow="{{false}}" />
+        <view style="padding: 20rpx 30rpx;">
+            <!-- 客户信息 -->
+            <view class="info-row">
+                <text class="label">客户：</text>
+                <text class="value">{{ item.name }} {{ item.gender == 1 ? '先生' : item.gender == 2 ? '女士' : '' }} {{ item.mobile }}</text>
+            </view>
+            <!-- 带看经纪人 -->
+            <view class="info-row" wx:if="{{item.brokerName}}">
+                <text class="label">经纪人：</text>
+                <text class="value">{{ item.brokerName }} {{ item.brokerMobile }}</text>
+            </view>
+            <!-- 渠道人员 -->
+            <view class="info-row" wx:if="{{item.channelUser}}">
+                <text class="label">渠道：</text>
+                <text class="value">{{ item.channelUser.nickname || item.channelUser.mobile }}</text>
+            </view>
+            <!-- 意向楼盘 -->
+            <view class="info-row" wx:if="{{item.postIds}}">
+                <text class="label">意向楼盘：</text>
+                <text class="value">{{ item.postIds }}</text>
+            </view>
+            <!-- 备注 -->
+            <view class="info-row" wx:if="{{item.note}}">
+                <text class="label">备注：</text>
+                <text class="value">{{ item.note }}</text>
+            </view>
+        </view>
         <view slot="footer" class="footer">
-            <view class="time">姓名：{{ item.name }} 电话：{{ item.mobile }}</view>
+            <view class="time">报备时间：{{ item.createdAt }}</view>
             <view class="btns">
                 <van-button plain wx:if="{{userGroup == 'broker'}}" size="mini" bindtap="callHandle" type="info" style="margin-right:20rpx;">
                     拨打电话

@@ -23,6 +23,7 @@
     "van-tabs": "/vant/tabs/index",
     "van-tab": "/vant/tab/index",
     "raw-html": "/components/raw-html/index",
-    "recommended-post-items": "/components/recommended-post-items/index"
+    "recommended-post-items": "/components/recommended-post-items/index",
+    "post-pdf-list": "/components/post-pdf-list/post-pdf-list"
   }
 }

@@ -130,6 +130,12 @@ public class BookingLogService {
             if (map.getName()==null){
                 map.setName("");
             }
+            // 转换性别显示
+            if (bookingLog.getGender() != null) {
+                map.setGender(bookingLog.getGender() == 1 ? "先生" : bookingLog.getGender() == 2 ? "女士" : "保密");
+            } else {
+                map.setGender("保密");
+            }
 
             return map;
         }).collect(Collectors.toList());
@@ -160,6 +166,20 @@ public class BookingLogService {
         map.setUserId(bookingLogsRequest.getUserId());
         map.setUser(userByid.get());
         map.setPost(postById.get());
+
+        // 性别默认为0（保密）
+        if (map.getGender() == null) {
+            map.setGender(0);
+        }
+
+        // 报备功能：设置渠道人员
+        if (bookingLogsRequest.getChannelUserId() != null) {
+            Optional<User> channelUser = userRepository.findById(bookingLogsRequest.getChannelUserId());
+            if (channelUser.isPresent()) {
+                map.setChannelUser(channelUser.get());
+            }
+        }
+
         bookingLogRepository.saveAndFlush(map);
         return JsonResponse.ok("预约成功");
     }

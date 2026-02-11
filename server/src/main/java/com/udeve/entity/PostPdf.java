@@ -1,4 +1,4 @@
-package com.udeve.vo;
+package com.udeve.entity;
 /**
  * +----------------------------------------------------------------------
  * | 友得云客  - 开启房产营销新纪元
@@ -13,46 +13,38 @@ package com.udeve.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import java.time.LocalDate;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-public class BookingLogsVo {
+@Entity
+@Table(name = PostPdf.TABLE_NAME)
+public class PostPdf {
+    public static final String TABLE_NAME = "post_pdfs";
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    public AdminPostDetailVo post;
+    @ManyToOne
+    @JoinColumn(name = "postId")
+    public Post post;
 
-    public AdminUserVo user;
-
-    public String remark;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime createdAt;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime updatedAt;
-
-    public Integer status;
-
-    public LocalDate date;
-
-    public String time;
+    @Column(insertable = false, updatable = false)
+    public Integer postId;
 
     public String name;
+    public String url;
+    public Integer size;
+    
+    @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime createdAt;
+    
+    @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public LocalDateTime updatedAt;
 
-    public String mobile;
-
-    // 性别：0-保密，1-男，2-女
-    public Integer gender;
-
-    // 报备功能新增字段
-    public String brokerName;      // 带看经纪人姓名
-
-    public String brokerMobile;    // 带看经纪人电话
-
-    public AdminUserVo channelUser;  // 渠道人员
-
-    public String postIds;         // 意向楼盘ID列表
-
-    public String note;            // 备注
+    public Integer sort = 0;
 }

@@ -16,6 +16,8 @@
         <view class="right">
             <view class="title">
                 {{post.title}}
+                <van-tag wx:if="{{post.house_type == 1}}" color="#ff4d4f" size="mini" style="margin-left: 8rpx;">工抵</van-tag>
+                <van-tag wx:if="{{post.house_type == 2}}" color="#1890ff" size="mini" style="margin-left: 8rpx;">代卖</van-tag>
             </view>
             <view class="address">{{post.type_name || '户型'}}/{{post.area_value}}㎡/{{post.position}}</view>
             <view class="tags">
@@ -27,6 +29,11 @@
 
             <view class="price">
                 <text class="red">{{post.price_label}} <text style="font-size: 36rpx;">{{post.price_value}}</text> {{post.price_unit}}</text>
+            </view>
+            <view class="commission" wx:if="{{post.commission_amount || post.commission_rate}}">
+                <van-tag color="#ff6600" size="mini">佣金</van-tag>
+                <text class="commission-text" wx:if="{{post.commission_amount}}">{{post.commission_amount}}元</text>
+                <text class="commission-text" wx:if="{{post.commission_rate}}">{{post.commission_rate}}%</text>
             </view>
 
             <!-- <view class="point {{ point.cat}}" wx:for="{{post.points_info}}" wx:for-item="point">

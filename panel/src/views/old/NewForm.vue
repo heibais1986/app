@@ -114,6 +114,38 @@
           </div>
         </el-form-item>
 
+        <el-form-item label="房源类型">
+          <el-radio-group v-model="newhouse.house_type">
+            <el-radio :label="0">普通房源</el-radio>
+            <el-radio :label="1">工抵房源</el-radio>
+            <el-radio :label="2">代卖房源</el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+        <el-form-item label="推广佣金">
+          <el-input
+            style="width: 150px"
+            v-model="newhouse.commission_amount"
+            type="number"
+            placeholder="佣金金额"
+          >
+            <template slot="append">元</template>
+          </el-input>
+          <span style="margin: 0 10px">或</span>
+          <el-input
+            style="width: 150px"
+            v-model="newhouse.commission_rate"
+            type="number"
+            placeholder="佣金比例"
+          >
+            <template slot="append">%</template>
+          </el-input>
+          <div style="font-size: 12px; color: #999; margin-top: 5px">
+            <i class="el-icon-info"></i>
+            设置推广佣金可以激励经纪人带看，金额和比例二选一
+          </div>
+        </el-form-item>
+
         <el-form-item label="联系方式">
           <el-input
             style="width: 100px"

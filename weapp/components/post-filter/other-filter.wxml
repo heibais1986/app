@@ -40,6 +40,14 @@
                     <selector options="{{houseTypeItems}}" model:value="{{houseTypeValue}}"></selector>
                 </view>
             </view>
+            <view class="section house-property-type">
+                <view class="title-block">
+                    <view class="title">房源类型</view>
+                </view>
+                <view class="body">
+                    <selector options="{{housePropertyTypeItems}}" model:value="{{housePropertyTypeValue}}"></selector>
+                </view>
+            </view>
             <view class="section fitment">
                 <view class="title-block">
                     <view class="title">装修</view>

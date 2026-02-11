@@ -49,6 +49,15 @@
                     <album-selector custom-style="width:200px;" size="small" v-model="album_id"></album-selector>
                 </el-form-item>
 
+                <el-form-item label="房源类型">
+                    <el-select v-model="house_type" placeholder="请选择房源类型" style="width: 200px">
+                        <el-option label="不限" :value="null"></el-option>
+                        <el-option label="普通房源" :value="0"></el-option>
+                        <el-option label="工抵房源" :value="1"></el-option>
+                        <el-option label="代卖房源" :value="2"></el-option>
+                    </el-select>
+                </el-form-item>
+
             </el-form>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="cancleHandle" size="small" icon="el-icon-close">取消</el-button>
@@ -87,6 +96,7 @@ export default {
             catIds: [],
             tagItems: [],
             tagIds: [],
+            house_type: null,
         };
     },
     props: {},
@@ -129,16 +139,25 @@ export default {
             if (this.district_id) {
                 v.district_id = this.district_id;
             }
+            if (this.house_type !== null && this.house_type !== undefined) {
+                v.house_type = this.house_type;
+            }
             return v;
         },
     },
 
     methods: {
         clearHandle: function () {
-            var _this = this;
-            Object.keys(this.filter).forEach((key, i) => {
-                this.$set(_this, key, null);
-            });
+            this.kw = "";
+            this.area_min = null;
+            this.area_max = null;
+            this.city_id = null;
+            this.district_id = null;
+            this.total_price_min = null;
+            this.total_price_max = null;
+            this.album_id = null;
+            this.user_id = null;
+            this.house_type = null;
             this.$emit("change", {});
         },
 

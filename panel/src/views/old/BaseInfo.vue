@@ -93,6 +93,15 @@
         </div>
 
         <div class="item">
+            <div class="label">推广佣金</div>
+            <div class="value">
+                <span v-if="post.commission_amount">{{ post.commission_amount }}元</span>
+                <span v-else-if="post.commission_rate">{{ post.commission_rate }}%</span>
+                <span v-else>-</span>
+            </div>
+        </div>
+
+        <div class="item">
             <div class="label">备注</div>
             <div class="value">
                 {{ post.admin_remark || '-' }} <!-- el-link icon="el-icon-edit" type="primary"></el-link -->

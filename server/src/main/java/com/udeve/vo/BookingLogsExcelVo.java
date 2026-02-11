@@ -30,6 +30,9 @@ public class BookingLogsExcelVo {
     @ExcelProperty("手机号")
     public String mobile;
 
+    @ExcelProperty("性别")
+    public String gender;
+
     @ExcelProperty("预约日期")
     public LocalDate date;
 

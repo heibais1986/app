@@ -92,6 +92,41 @@
           </el-radio-group>
         </el-form-item>
         <div class="blank"></div>
+
+        <el-form-item label="房源类型">
+          <el-radio-group v-model="post.house_type">
+            <el-radio :label="0">普通房源</el-radio>
+            <el-radio :label="1">工抵房源</el-radio>
+            <el-radio :label="2">代卖房源</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <div class="blank"></div>
+
+        <el-form-item label="推广佣金">
+          <el-input
+            style="width: 150px"
+            v-model="post.commission_amount"
+            type="number"
+            placeholder="佣金金额"
+          >
+            <template slot="append">元</template>
+          </el-input>
+          <span style="margin: 0 10px">或</span>
+          <el-input
+            style="width: 150px"
+            v-model="post.commission_rate"
+            type="number"
+            placeholder="佣金比例"
+          >
+            <template slot="append">%</template>
+          </el-input>
+          <div style="font-size: 12px; color: #999; margin-top: 5px">
+            <i class="el-icon-info"></i>
+            设置推广佣金可以激励经纪人带看，金额和比例二选一
+          </div>
+        </el-form-item>
+        <div class="blank"></div>
+
         <el-form-item label="上架状态">
           <el-radio-group v-model="post.is_public">
             <el-radio :label="true">上架</el-radio>
@@ -152,6 +187,21 @@
             v-model="post.unknow_total_price"
             >待定</el-checkbox
           >
+        </el-form-item>
+
+        <el-form-item label="最低首付">
+          <el-input
+            style="width: 220px"
+            v-model="post.min_down_payment"
+            type="number"
+            placeholder="请输入最低首付金额"
+          >
+            <template slot="append">万</template>
+          </el-input>
+          <div style="font-size: 12px; color: #999; margin-top: 5px">
+            <i class="el-icon-info"></i>
+            最低首付金额，单位万元
+          </div>
         </el-form-item>
 
         <el-form-item label="参考均价">
@@ -254,6 +304,14 @@
             备注信息不会对客户展示，仅在管理后台显示
           </div>
         </el-form-item>
+        
+        <el-form-item label="楼盘PDF" v-if="post.id">
+          <post-pdf-manager :postId="post.id"></post-pdf-manager>
+          <div style="font-size: 12px; color: #999; margin-top: 5px">
+            <i class="el-icon-info"></i>
+            上传楼盘相关资料PDF文件，用户可在小程序端查看和下载
+          </div>
+        </el-form-item>
       </el-form>
     </div>
     <div style="display: flex; flex-direction: row-reverse">
@@ -282,6 +340,7 @@ import RangeInput from "@/components/RangeInput";
 import FitmentSelector from "@/components/FitmentSelector";
 import CityDistrictSelector from "@/components/CityDistrictSelector";
 import MapMarkerDialogButton from "@/components/MapMarkerDialogButton";
+import PostPdfManager from "@/components/PostPdfManager";
 
 export default {
   components: {
@@ -292,6 +351,7 @@ export default {
     CityDistrictSelector,
     FitmentSelector,
     MapMarkerDialogButton,
+    PostPdfManager,
   },
   data() {
     return {

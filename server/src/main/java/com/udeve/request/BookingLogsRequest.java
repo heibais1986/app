@@ -30,4 +30,14 @@ public class BookingLogsRequest implements Serializable {
     @NotBlank(message = "手机号不能为空")
     public String mobile;
 
+    // 性别：0-保密，1-男，2-女
+    public Integer gender = 0;
+
+    // 报备功能新增字段
+    public String brokerName;      // 带看经纪人姓名
+    public String brokerMobile;    // 带看经纪人电话
+    public Integer channelUserId;  // 渠道人员ID
+    public String postIds;         // 意向楼盘ID列表，逗号分隔
+    public String note;            // 备注
+
 }

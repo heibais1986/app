@@ -70,6 +70,14 @@ Component({
         catValue: 0,
         areaValue: '',
         filter: {},
+        // 房源类型筛选：普通、工抵房、代卖房
+        housePropertyTypeItems: [
+            { name: '不限', value: null },
+            { name: '普通房源', value: 0 },
+            { name: '工抵房源', value: 1 },
+            { name: '代卖房源', value: 2 },
+        ],
+        housePropertyTypeValue: null,
 
     },
 
@@ -132,6 +140,15 @@ Component({
             } else {
                 filter.fitment_id = this.data.fitmentOptions[v].id
             }
+
+            // 房源类型筛选
+            v = this.data.housePropertyTypeValue
+            if (v === null || v === undefined) {
+                delete filter.house_type
+            } else {
+                filter.house_type = v
+            }
+
             console.log('other filter is', filter)
             this.setData({ filter: filter })
             this.triggerEvent('change', filter)
@@ -142,7 +159,8 @@ Component({
                 areaValue: '',
                 catValue: 0,
                 fitmentValue: 0,
-                houseTypeValue: 0
+                houseTypeValue: 0,
+                housePropertyTypeValue: null
             })
         },
 

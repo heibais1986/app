@@ -41,6 +41,9 @@ public class PostQueryRequest implements  Serializable{
     public Integer page;
     public Integer perPage;
 
+    // 房源类型：0-普通，1-工抵房，2-代卖房
+    public Integer houseType;
+
     @JSONField(name = "type")
     public String typeName;
 

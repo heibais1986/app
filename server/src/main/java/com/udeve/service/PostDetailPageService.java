@@ -330,6 +330,7 @@ public class PostDetailPageService {
         value.put("area_info", postItemVo.getAreaInfo());
         value.put("average_price_info", postItemVo.getAveragePriceInfo());
         value.put("total_price_info", postItemVo.getTotalPriceInfo());
+        value.put("min_down_payment", post.getMinDownPayment());
         value.put("cats", cats);
         value.put("more_url", "/pkgPost/pages/desc/index?post_id=" + post.getId());
         value.put("point_title",post.getPointTitle());

@@ -58,4 +58,24 @@ public class BookingLog {
 
     public String mobile;
 
+    // 性别：0-保密，1-男，2-女
+    public Integer gender = 0;
+
+    // 报备功能新增字段
+    public String brokerName;      // 带看经纪人姓名
+
+    public String brokerMobile;    // 带看经纪人电话
+
+    @ManyToOne
+    @JoinColumn(name = "channelUserId")
+    public User channelUser;       // 渠道人员
+
+    @Column(insertable = false, updatable = false)
+    public Integer channelUserId;  // 渠道人员ID
+
+    // 意向楼盘，多选，以逗号分隔存储楼盘ID
+    public String postIds;
+
+    public String note;            // 备注
+
 }

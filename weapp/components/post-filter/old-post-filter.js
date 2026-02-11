@@ -33,6 +33,15 @@ Component({
         totalPriceMax: null,
         houseTypeIndex: 0,
 
+        // 房源类型筛选：普通、工抵房、代卖房
+        housePropertyTypeItems: [
+            { name: '不限', value: null },
+            { name: '普通房源', value: 0 },
+            { name: '工抵房源', value: 1 },
+            { name: '代卖房源', value: 2 },
+        ],
+        housePropertyTypeIndex: 0,
+
         areaMin: null,
         areaMax: null,
         showPop: false,
@@ -118,6 +127,14 @@ Component({
                 filter.type = v
             }
 
+            // 房源类型筛选
+            v = this.data.housePropertyTypeItems[this.data.housePropertyTypeIndex].value
+            if (v === null) {
+                delete filter.house_type
+            } else {
+                filter.house_type = v
+            }
+
             filter.page = 1
             this.setData({ filter: filter })
             this.triggerEvent('change', filter)
@@ -129,12 +146,17 @@ Component({
                 totalPriceMax: null,
                 areaMin: null,
                 areaMax: null,
-                houseTypeIndex: 0
+                houseTypeIndex: 0,
+                housePropertyTypeIndex: 0
             })
         },
         houseTypeItemHandle: function (e) {
             const { index } = e.target.dataset
             this.setData({ houseTypeIndex: index })
+        },
+        housePropertyTypeItemHandle: function (e) {
+            const { index } = e.target.dataset
+            this.setData({ housePropertyTypeIndex: index })
         },
         totalPriceChange: function (e) {
             var key = e.currentTarget.dataset.name

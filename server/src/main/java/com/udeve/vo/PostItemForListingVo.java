@@ -59,6 +59,7 @@ public class PostItemForListingVo {
     public Float areaMin = 0F;
     public Float totalPriceMin = 0.0F;
     public Float totalPriceMax = 0.0F;
+    public Float minDownPayment = 0.0F;
     public JSONObject areaInfo;
     public JSONObject averagePriceInfo;
     public JSONObject totalPriceInfo;

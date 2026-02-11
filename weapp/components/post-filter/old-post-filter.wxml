@@ -56,6 +56,18 @@
                         </view>
                     </view>
                 </view>
+                <view class="section house-property-type">
+                    <view class="title-block">
+                        <view class="title">房源类型</view>
+                    </view>
+                    <view class="body">
+                        <view class="house-type-list">
+                            <view data-index="{{index}}" bindtap="housePropertyTypeItemHandle" wx:key="{{index}}" class="house-type-item {{ housePropertyTypeIndex === index ? 'active' : '' }}" wx:for="{{housePropertyTypeItems}}">
+                                {{item.name}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
             </view>
         </popup>
     </view>

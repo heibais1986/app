@@ -25,6 +25,7 @@
     border-radius: 15rpx;
     margin-right: 25rpx;
     margin-top: 15rpx;
+    position: relative;
 }
 
 .xiangce-item:nth-child(2n+0) {
@@ -39,4 +40,19 @@
 }
 .mask{
     width:100rpx;height:100rpx;position: absolute;top: 70rpx;left: 115rpx;
+}
+
+/* 下载按钮样式 */
+.download-btn {
+    position: absolute;
+    right: 15rpx;
+    bottom: 15rpx;
+    width: 50rpx;
+    height: 50rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }

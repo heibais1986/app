@@ -1,0 +1,32 @@
+<!--
+ +----------------------------------------------------------------------
+ | 友得云客  - 开启房产营销新纪元
+ +----------------------------------------------------------------------
+ | Copyright (c) 2019~2023 优得（西安）信息科技有限公司版权所有
+ +----------------------------------------------------------------------
+ | Licensed 友得云客不是自由软件 未经允许不可移除相关版权
+ +----------------------------------------------------------------------
+ | Author: www.youdeyunke.com
+ +----------------------------------------------------------------------
+-->
+<!-- components/post-pdf-list/post-pdf-list.wxml -->
+<view class="pdf-list" wx:if="{{pdfs.length > 0}}">
+    <view class="pdf-header">
+        <text class="title">楼盘资料</text>
+        <text class="count">({{pdfs.length}}份)</text>
+    </view>
+    <view class="pdf-items">
+        <view class="pdf-item" wx:for="{{pdfs}}" wx:key="id" bindtap="viewPdf" data-url="{{item.url}}" data-name="{{item.name}}">
+            <view class="pdf-icon">
+                <van-icon name="description" size="40rpx" color="#ff4d4f" />
+            </view>
+            <view class="pdf-info">
+                <view class="pdf-name">{{item.name}}</view>
+                <view class="pdf-size" wx:if="{{item.size}}">{{item.sizeText}}</view>
+            </view>
+            <view class="pdf-action">
+                <van-icon name="down" size="32rpx" color="#999" />
+            </view>
+        </view>
+    </view>
+</view>

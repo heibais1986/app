@@ -198,6 +198,10 @@ public class PostService {
                 predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("title"), "%" + query.getKw() + "%"),
                         criteriaBuilder.like(root.get("street"), "%" + query.getKw() + "%")));
             }
+            // 房源类型筛选：0-普通，1-工抵房，2-代卖房
+            if (query.getHouseType() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("houseType"), query.getHouseType()));
+            }
             criteriaQuery.distinct(true); // 添加distinct关键字，只返回不同的记录
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         };

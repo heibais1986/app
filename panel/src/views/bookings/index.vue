@@ -85,6 +85,11 @@
         </el-table-column>
         <el-table-column label="客户姓名" :width="100" prop="name">
         </el-table-column>
+        <el-table-column label="客户性别" :width="80">
+          <template slot-scope="scope">
+            {{ scope.row.gender == 1 ? '先生' : scope.row.gender == 2 ? '女士' : '保密' }}
+          </template>
+        </el-table-column>
 
         <el-table-column label="预约时间">
           <template slot-scope="scope">{{ scope.row.date }} {{ scope.row.time }}</template>

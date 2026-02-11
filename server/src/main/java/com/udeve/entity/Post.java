@@ -70,6 +70,8 @@ public class Post {
 
     public Float totalPriceMax = Float.valueOf(0.0F);
 
+    public Float minDownPayment = Float.valueOf(0.0F);
+
     public Float areaMax = Float.valueOf(0.0F);
 
     public Float areaMin = Float.valueOf(0);
@@ -211,5 +213,14 @@ public class Post {
         info.put("text", "%s~%s".formatted(this.areaMin, this.areaMax));
         return info;
     }
+
+    // 房源类型：0-普通房源，1-工抵房源，2-代卖房源
+    public Integer houseType = 0;
+
+    // 推广佣金金额（元）
+    public Float commissionAmount;
+
+    // 推广佣金比例（%）
+    public Float commissionRate;
 
 }

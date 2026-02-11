@@ -24,11 +24,29 @@ Page({
     currentDateIndex: 0,
     currentTimeIndex: null,
 
+    // 客户信息
     name: '',
     date: '',
     time: '',
-    remark: '',
-    mobile: '', // 如果当前用户已经登录，自动填充手机号， 并且不能被修改
+    mobile: '',
+    gender: 0,  // 性别：0-保密，1-男，2-女
+
+    // 带看经纪人信息
+    brokerName: '',
+    brokerMobile: '',
+
+    // 渠道人员信息
+    channelUserId: null,
+    channelUserName: '',
+
+    // 意向楼盘
+    selectedPosts: [],
+    showPostSelector: false,
+    postSearchKeyword: '',
+    postList: [],
+
+    // 备注
+    note: '',
 
     dates: [],
     postId: null,
@@ -51,7 +69,12 @@ Page({
     this.setData({
       user: user,
       mobile: user ? user.mobile : '',
-        postId: options.pid,
+      // 自动填充带看经纪人信息（当前登录用户）
+      brokerName: user ? (user.nickname || user.name || '') : '',
+      brokerMobile: user ? user.mobile : '',
+      channelUserId: user ? user.id : null,
+      channelUserName: user ? user.nickname || user.mobile : '当前用户',
+      postId: options.pid,
     })
     this.loadPostData(options.pid)
     this.loadPostBookingConfig(options.pid)
@@ -148,6 +171,11 @@ Page({
           _this.setData({
               mobile: u.mobile,
               mobileLock: true,
+              // 登录成功后自动填充带看经纪人信息
+              brokerName: u.nickname || u.name || '',
+              brokerMobile: u.mobile || '',
+              channelUserId: u.id,
+              channelUserName: u.nickname || u.mobile || '当前用户',
           })
       }
     },1000)
@@ -167,7 +195,7 @@ Page({
     }
     if (this.data.name == '') {
       wx.showToast({
-        title: '请输入您的姓名',
+        title: '请输入客户姓名',
         icon: 'none'
       })
       this.setData({
@@ -177,7 +205,7 @@ Page({
     }
     if (this.data.mobile == '') {
       wx.showToast({
-        title: '请输入您的联系方式',
+        title: '请输入客户联系方式',
         icon: 'none'
       })
       this.setData({
@@ -185,7 +213,7 @@ Page({
       })
       return false
     }
-    if (this.data.mobile.length < '11') {
+    if (this.data.mobile.length < 11) {
       wx.showToast({
         title: '号码格式错误，请重新输入',
         icon: 'none'
@@ -195,42 +223,92 @@ Page({
       })
       return false
     }
-
+    if (this.data.brokerName == '') {
+      wx.showToast({
+        title: '请输入经纪人姓名',
+        icon: 'none'
+      })
+      this.setData({
+        loading: false
+      })
+      return false
+    }
+    if (this.data.brokerMobile == '') {
+      wx.showToast({
+        title: '请输入经纪人电话',
+        icon: 'none'
+      })
+      this.setData({
+        loading: false
+      })
+      return false
+    }
+    if (this.data.brokerMobile.length < 11) {
+      wx.showToast({
+        title: '经纪人电话格式错误',
+        icon: 'none'
+      })
+      this.setData({
+        loading: false
+      })
+      return false
+    }
 
     var _this = this
-    var log = {
-      post_id: this.properties.postId,
-      name: this.data.name,
-      remark: this.data.remark,
-      mobile: this.data.mobile,
-      status: 0,
-    }
     var d = this.data.days[this.data.currentDateIndex]
     var t = d.times[this.data.currentTimeIndex]
-
     var year = new Date().getFullYear()
 
-    log['time'] = t.value
-    log['date'] = year + '-' + d.date
+    // 构建意向楼盘ID列表
+    var postIds = this.data.selectedPosts.map(post => post.id).join(',')
+    if (!postIds) {
+      postIds = this.data.postId.toString()
+    }
+
+    var log = {
+      post_id: this.data.postId,
+      name: this.data.name,
+      mobile: this.data.mobile,
+      gender: this.data.gender,
+      broker_name: this.data.brokerName,
+      broker_mobile: this.data.brokerMobile,
+      channel_user_id: this.data.channelUserId,
+      post_ids: postIds,
+      note: this.data.note,
+      date: year + '-' + d.date,
+      time: t.value,
+      status: 0,
+    }
 
     this.setData({
       loging: true
     })
-    //   √
-    bookingApi.createBooking(
-      log
-    ).then((resp) => {
+
+    bookingApi.createBooking(log).then((resp) => {
       _this.setData({
         loading: false
       })
-      if (resp.data.status == 0) {
+      if (resp.data.status == 0 || resp.data.code == 0) {
         wx.showToast({
-          title: '预约成功',
+          title: '报备成功',
         })
-        setTimeout(()=>{
+        setTimeout(() => {
           wx.navigateBack()
-        },2000)
+        }, 2000)
+      } else {
+        wx.showToast({
+          title: resp.data.message || '报备失败',
+          icon: 'none'
+        })
       }
+    }).catch((err) => {
+      _this.setData({
+        loading: false
+      })
+      wx.showToast({
+        title: '网络错误，请重试',
+        icon: 'none'
+      })
     })
   },
 
@@ -356,7 +434,20 @@ Page({
         this.setData({
             mobile: u.mobile,
             mobileLock: true,
+            channelUserId: u.id,
+            channelUserName: u.nickname || u.mobile || '当前用户',
         })
+        // 如果带看经纪人信息为空，则自动填充当前用户信息
+        if (!this.data.brokerName) {
+            this.setData({
+                brokerName: u.nickname || u.name || ''
+            })
+        }
+        if (!this.data.brokerMobile) {
+            this.setData({
+                brokerMobile: u.mobile || ''
+            })
+        }
     }
     // this.getCurrentAndNextWeek()
 
@@ -417,5 +508,105 @@ Page({
       title: _this.data.post.title + "预约看房",
       query: 'pid=' + _this.data.postId
     }
+  },
+
+  // ========== 报备功能：楼盘选择相关方法 ==========
+
+  showPostSelector() {
+    this.setData({
+      showPostSelector: true
+    })
+    this.loadPostList()
+  },
+
+  onClosePostSelector() {
+    this.setData({
+      showPostSelector: false
+    })
+  },
+
+  onPostSearch(e) {
+    this.setData({
+      postSearchKeyword: e.detail
+    })
+    this.loadPostList()
+  },
+
+  loadPostList() {
+    const postApi = require("../../../api/post")
+    var _this = this
+    postApi.getPostList({
+      kw: this.data.postSearchKeyword,
+      per_page: 20
+    }).then((resp) => {
+      if (resp.data.code === 0) {
+        _this.setData({
+          postList: resp.data.data || []
+        })
+      }
+    })
+  },
+
+  selectPost(e) {
+    var post = e.currentTarget.dataset.post
+    var selectedPosts = this.data.selectedPosts
+
+    // 检查是否已选择
+    var index = selectedPosts.findIndex(item => item.id === post.id)
+    if (index > -1) {
+      // 已选择，则移除
+      selectedPosts.splice(index, 1)
+    } else {
+      // 未选择，添加（最多5个）
+      if (selectedPosts.length >= 5) {
+        wx.showToast({
+          title: '最多选择5个楼盘',
+          icon: 'none'
+        })
+        return
+      }
+      selectedPosts.push(post)
+    }
+
+    this.setData({
+      selectedPosts: selectedPosts
+    })
+  },
+
+  removePost(e) {
+    var postId = e.currentTarget.dataset.id
+    var selectedPosts = this.data.selectedPosts.filter(item => item.id !== postId)
+    this.setData({
+      selectedPosts: selectedPosts
+    })
+  },
+
+  isPostSelected(postId) {
+    return this.data.selectedPosts.some(item => item.id === postId)
+  },
+
+  brokerNameChange(e) {
+    this.setData({
+      brokerName: e.detail
+    })
+  },
+
+  brokerMobileChange(e) {
+    this.setData({
+      brokerMobile: e.detail
+    })
+  },
+
+  noteChange(e) {
+    this.setData({
+      note: e.detail
+    })
+  },
+
+  // 性别选择变化
+  onGenderChange(e) {
+    this.setData({
+      gender: parseInt(e.detail)
+    })
   }
 })

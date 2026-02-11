@@ -32,7 +32,11 @@
     <view class="content-desc">{{value.total_price_info.text}} {{value.total_price_info.px}}</view>
   </view>
 
-
+  <view class="block-content" wx:if="{{value.min_down_payment && value.min_down_payment > 0}}">
+    <view class="content-title">最低首付</view>
+    <view class="maohao" style="margin-left:10rpx"></view>
+    <view class="content-desc"><text style="color: #ff6600;font-weight: bold;">{{value.min_down_payment}} 万</text></view>
+  </view>
 
   <view class="block-content">
     <view class="content-title">面积区间</view>

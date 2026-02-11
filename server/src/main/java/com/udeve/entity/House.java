@@ -177,4 +177,13 @@ public class House {
 
     public String images;
 
+    // 房源类型：0-普通房源，1-工抵房源，2-代卖房源
+    public Integer houseType = 0;
+
+    // 推广佣金金额（元）
+    public Float commissionAmount;
+
+    // 推广佣金比例（%）
+    public Float commissionRate;
+
 }

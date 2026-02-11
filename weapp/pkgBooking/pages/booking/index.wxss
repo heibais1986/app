@@ -171,3 +171,39 @@ button.fake::after {
   background: none;
   overflow: visible;
 }
+
+/* 报备功能：楼盘选择样式 */
+.selected-posts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+
+.post-tag {
+  background-color: #f0f0f0;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+  margin-right: 15rpx;
+  margin-bottom: 15rpx;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+}
+
+.post-tag van-icon {
+  margin-left: 10rpx;
+}
+
+/* 性别选择样式 */
+.gender-field {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ebedf0;
+}
+
+.gender-label {
+  width: 180rpx;
+  font-size: 28rpx;
+  color: #646566;
+}

@@ -75,6 +75,7 @@ public class AdminPostDetailVo implements Serializable {
     public String title;
     public Float totalPriceMax;
     public Float totalPriceMin;
+    public Float minDownPayment;
     public Boolean unknowPrice;
     public Boolean unknowTotalPrice;
     public Boolean unknowArea;
