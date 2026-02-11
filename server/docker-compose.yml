@@ -18,7 +18,6 @@ services:
 
   server:
     image: anchorlau/ce-server
-    platform: "linux/x86_64"        # 如果是m芯片必须加这个
     privileged: true
     restart: always
     ports:
