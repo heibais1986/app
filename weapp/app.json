@@ -1,4 +1,5 @@
 {
+  "lazyCodeLoading": "requiredComponents",
   "subpackages": [
     {
       "root": "pkgMyself",
