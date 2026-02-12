@@ -11,8 +11,8 @@
 */
 // components/page-contact/index.js
 const app = getApp()
-const brokerApi = require("../../api/broker")
-const postApi = require("../../api/post")
+const brokerApi = getApp().apiLoader.get('broker')
+const postApi = getApp().apiLoader.get('post')
 Component({
   /**
    * 组件的属性列表

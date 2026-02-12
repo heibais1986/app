@@ -11,7 +11,7 @@
 */
 // pages/qa/answer-like.js
 const app = getApp()
-const qaApi = require("../../api/qa")
+const qaApi = getApp().apiLoader.get('qa')
 Component({
     /**
      * 组件的属性列表

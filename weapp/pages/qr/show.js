@@ -11,7 +11,7 @@
 */
 // pages/qr/show.js
 const app = getApp()
-const qrApi = require("../../api/qr")
+const qrApi = getApp().apiLoader.get('qr')
 
 Page({
 

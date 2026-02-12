@@ -10,7 +10,7 @@
 * +----------------------------------------------------------------------
 */
 // components/recommended-post-items/index.js
-const postApi = require("../../api/post")
+const postApi = getApp().apiLoader.get('post')
 const app = getApp()
 
 Component({

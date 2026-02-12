@@ -10,7 +10,7 @@
  * +----------------------------------------------------------------------
  */
 // components/post-pdf-list/post-pdf-list.js
-const postPdfApi = require('../../api/postPdf.js');
+const postPdfApi = getApp().apiLoader.get('postPdf')
 
 Component({
     /**

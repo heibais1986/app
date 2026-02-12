@@ -11,7 +11,7 @@
 */
 // components/fav.js
 const app = getApp()
-const favApi = require("../../../api/fav")
+const favApi = getApp().apiLoader.get('fav')
 var auth = require('../../../utils/auth.js');
 
 Component({

@@ -11,7 +11,7 @@
 */
 // pkgPost/components/broker-contact/index.js
 const app = getApp()
-const brokerApi = require("../../api/broker")
+const brokerApi = getApp().apiLoader.get('broker')
 
 Component({
     /**

@@ -11,7 +11,7 @@
 */
 // pages/cities/select.js
 const app = getApp()
-const cityApi = require("../../api/city")
+const cityApi = getApp().apiLoader.get('city')
 
 Page({
 

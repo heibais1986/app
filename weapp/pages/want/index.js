@@ -11,9 +11,9 @@
  */
 // pages/myself/zhao.js
 const app = getApp()
-const needApi = require("../../api/need")
-const cityApi = require("../../api/city")
-const myEnum = require("../../api/enum")
+const needApi = getApp().apiLoader.get('need')
+const cityApi = getApp().apiLoader.get('city')
+const myEnum = getApp().apiLoader.get('enum')
 import Notify from '../../vant/notify/notify';
 
 Page({

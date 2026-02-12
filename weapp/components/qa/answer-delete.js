@@ -12,7 +12,7 @@
 // pages/qa/answer-delete.js
 const app = getApp()
 var auth = require('../../utils/auth.js');
-const qaApi = require("../../api/qa")
+const qaApi = getApp().apiLoader.get('qa')
 
 Component({
     /**

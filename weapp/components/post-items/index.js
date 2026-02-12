@@ -11,7 +11,7 @@
 */
 // components/sub-district/items.js
 const app = getApp();
-const postApi = require("../../api/post")
+const postApi = getApp().apiLoader.get('post')
 import Notify from '../../vant/notify/notify.js';
 
 

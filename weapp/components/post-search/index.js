@@ -11,7 +11,7 @@
 */
 // pkgSearch/components/search/index.js
 const app = getApp()
-const postApi = require("../../api/post")
+const postApi = getApp().apiLoader.get('post')
 Component({
     /**
      * 组件的属性列表

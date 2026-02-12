@@ -11,7 +11,7 @@
 */
 const app = getApp()
 const link = require('../page-home/link')
-const first_screenApi = require("../../api/first_screen")
+const first_screenApi = getApp().apiLoader.get('first_screen')
 
 Component({
     /**

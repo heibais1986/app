@@ -11,7 +11,7 @@
 */
 // pages/post/filter/city-picker.js
 const app = getApp()
-const cityApi = require("../../api/city")
+const cityApi = getApp().apiLoader.get('city')
 Component({
     /**
      * 组件的属性列表

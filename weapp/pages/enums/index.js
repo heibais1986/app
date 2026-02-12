@@ -10,7 +10,7 @@
 * +----------------------------------------------------------------------
 */
 // pages/enums/index.js'
-const enumApi = require("../../api/enum");
+const enumApi = getApp().apiLoader.get('enum')
 Page({
 
     /**

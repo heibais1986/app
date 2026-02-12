@@ -12,7 +12,7 @@
 // pages/home/home.js
 const app = getApp()
 const request = require('../../utils/request');
-const shareApi = require("../../api/share");
+const shareApi = getApp().apiLoader.get('share')
 
 Page({
     /**

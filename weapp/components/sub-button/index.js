@@ -11,7 +11,7 @@
 */
 // components/sub-button/index.js
 const app = getApp()
-const subscribeApi = require("../../api/subscribe")
+const subscribeApi = getApp().apiLoader.get('subscribe')
 const { post } = require("../../utils/request")
 Component({
   /**

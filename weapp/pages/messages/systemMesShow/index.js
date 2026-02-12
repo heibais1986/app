@@ -11,7 +11,7 @@
 */
 // pages/messages/systemMesShow/index.js
 const app = getApp()
-const messageApi = require("../../../api/message")
+const messageApi = getApp().apiLoader.get('message')
 Page({
 
   /**

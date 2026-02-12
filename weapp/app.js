@@ -14,11 +14,13 @@ const EXT = wx.getExtConfigSync()
 const qrApi = require("./api/qr");
 const heartbeatApi = require("./api/heartbeat");
 const myconfigApi = require("./api/myconfig")
+const apiLoader = require("./utils/api-loader");
 
 var onfire = require('/utils/onfire.min.js');
 wx.onfire = onfire
 
 App({
+    apiLoader: apiLoader,
     globalData: {
         backToReload: false, // 通过naviate back 返回页面后，是否需要刷新页面数据？ 在onShow函数总判断，如果为true，就刷新页面数据
         cityId: null, // 全局城市过滤
